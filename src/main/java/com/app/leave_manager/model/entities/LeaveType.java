@@ -54,6 +54,6 @@ public class LeaveType extends BaseEntity {
     private Tenant tenant;
 
     @Builder.Default
-    @OneToMany(mappedBy = "", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<LeaveType> leaveTypes = new HashSet<>();
+    @OneToMany(mappedBy = "leaveType", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<LeaveBalance> leaveBalances = new HashSet<>();
 }
