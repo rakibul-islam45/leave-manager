@@ -1,0 +1,85 @@
+application:
+  title: Leave Manager App
+  version: 1.0.0
+  time-zone: Asia/Dhaka
+
+
+# ===================================================================
+# SERVER CONFIGURATION
+# ===================================================================
+server:
+  port: 8001
+  shutdown: graceful
+  compression:
+    enabled: true
+    mime-types:
+      - application/json
+      - text/plain
+  error:
+    whitelabel:
+      enabled: false
+    include-message: never  # Don't expose error details in production
+
+# ===================================================================
+# SPRING FRAMEWORK CONFIGURATION
+# ===================================================================
+spring:
+  # Application Metadata
+  application:
+    name: leave-manager-app
+  # File Upload Configuration
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  # JSON Serialization
+  jackson:
+    time-zone: ${application.time-zone}
+    serialization:
+      indent-output: true
+    default-property-inclusion: non_null
+  # PostgresSQL DataSource Configuration
+  datasource:
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 20000
+  # JPA & Hibernate Configuration
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: ${application.time-zone}
+    open-in-view: true
+
+  # RabbitMQ Configuration
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        acknowledge-mode: manual
+
+
+
+# ===================================================================
+# API DOCUMENTATION CONFIGURATION
+# ===================================================================
+springdoc:
+  api-docs:
+    enabled: true
+    path: /rest-api-docs
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    path: /swagger-ui
+
