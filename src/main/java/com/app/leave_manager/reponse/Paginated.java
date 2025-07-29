@@ -7,7 +7,7 @@ import java.util.Collection;
 
 @Getter
 @SuperBuilder
-final public class Paginated<T> extends ApiResponse<T> {
+final public class Paginated<T> extends BaseResponse {
     private Integer size;
     private Integer page;
     private Integer totalPages;
