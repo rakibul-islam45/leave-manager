@@ -1,7 +1,7 @@
 package com.app.leave_manager.controller;
 
-import com.app.leave_manager.manager.UserManager;
-import com.app.leave_manager.model.dto.CreateUserRequest;
+import com.app.leave_manager.manager.TenantManager;
+import com.app.leave_manager.model.dto.CreateTenantRequest;
 import com.app.leave_manager.reponse.ApiResponse;
 import com.app.leave_manager.reponse.ResponseUtils;
 import jakarta.validation.Valid;
@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/users")
-public class UserController {
-
-    private final UserManager userManager;
+@RequestMapping("/api/v1/tenants")
+public class TenantController {
+    private final TenantManager tenantManager;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<String>> addUser(@Valid @RequestBody CreateUserRequest request) {
-        userManager.addUser(request);
-        return ResponseUtils.buildResponse(HttpStatus.CREATED, "User added successfully");
+    public ResponseEntity<ApiResponse<String>> addTenant(@Valid @RequestBody CreateTenantRequest request) {
+        tenantManager.addTenant(request);
+        return ResponseUtils.buildResponse(HttpStatus.CREATED, "Tenant added successfully");
     }
 }

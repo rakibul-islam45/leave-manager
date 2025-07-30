@@ -17,8 +17,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Table(name = "leave_balances", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "leave_type_id"}))
@@ -28,7 +30,8 @@ import org.hibernate.annotations.SQLRestriction;
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
-@SQLRestriction(value = "deleted = false")
+@FilterDef(name = "deletedLeaveBalanceFilter", parameters = @ParamDef(name = "isDeleted", type = boolean.class))
+@Filter(name = "deletedLeaveBalanceFilter", condition = "deleted = :isDeleted")
 @SQLDelete(sql = "UPDATE leave_balances SET deleted = true, unique_field_nonce = CURRENT_TIMESTAMP WHERE id = ? and version = ?")
 public class LeaveBalance extends BaseEntity {
 

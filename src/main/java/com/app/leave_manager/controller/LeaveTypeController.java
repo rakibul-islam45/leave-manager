@@ -1,7 +1,7 @@
 package com.app.leave_manager.controller;
 
-import com.app.leave_manager.manager.UserManager;
-import com.app.leave_manager.model.dto.CreateUserRequest;
+import com.app.leave_manager.manager.LeaveTypeManager;
+import com.app.leave_manager.model.dto.CreateLeaveTypeRequest;
 import com.app.leave_manager.reponse.ApiResponse;
 import com.app.leave_manager.reponse.ResponseUtils;
 import jakarta.validation.Valid;
@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/users")
-public class UserController {
-
-    private final UserManager userManager;
+@RequestMapping("/api/v1/leave-types")
+public class LeaveTypeController {
+    private final LeaveTypeManager leaveTypeManager;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<String>> addUser(@Valid @RequestBody CreateUserRequest request) {
-        userManager.addUser(request);
-        return ResponseUtils.buildResponse(HttpStatus.CREATED, "User added successfully");
+    public ResponseEntity<ApiResponse<String>> addLeaveType(@Valid @RequestBody CreateLeaveTypeRequest request) {
+        leaveTypeManager.addLeaveType(request);
+        return ResponseUtils.buildResponse(HttpStatus.CREATED, "Leave type added successfully");
     }
 }
