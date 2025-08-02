@@ -50,7 +50,7 @@ public class LeaveType extends BaseEntity {
     private String name;
 
     @Column(nullable = false)
-    private Integer defaultQuota;
+    private Integer defaultDays;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tenant_id", nullable = false)

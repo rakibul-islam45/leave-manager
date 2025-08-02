@@ -18,7 +18,7 @@ public class CreateLeaveTypeRequest {
 
     @NotNull(message = "Default quota is required")
     @Positive(message = "Default quota must be positive")
-    private Integer defaultQuota;
+    private Integer defaultDays;
 
     @NotNull(message = "Tenant ID is required")
     private Long tenantId;

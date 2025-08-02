@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class LeaveTypeService {
     private final LeaveTypeRepository leaveTypeRepository;
+    private final LeaveBalanceService leaveBalanceService;
 
     @Transactional
     public void addLeaveType(LeaveType leaveType) {
@@ -17,5 +18,6 @@ public class LeaveTypeService {
             throw new IllegalArgumentException("Leave type with this name already exists for the tenant");
         }
         leaveTypeRepository.save(leaveType);
+        leaveBalanceService.createLeaveBalancesForNewLeaveType(leaveType);
     }
 }
