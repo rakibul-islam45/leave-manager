@@ -12,7 +12,6 @@ public interface LeaveTypeMapper {
     @Mapping(target = "version", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "tenant", ignore = true)
     @Mapping(target = "leaveBalances", ignore = true)
     LeaveType toEntity(CreateLeaveTypeRequest request);
 }

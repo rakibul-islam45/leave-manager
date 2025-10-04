@@ -44,13 +44,14 @@ public class LeaveRequest extends BaseEntity {
     @SequenceGenerator(name = "leave_request_seq", sequenceName = "leave_request_seq")
     private Long id;
 
-
-
     @Column(nullable = false)
     private LocalDate startDate;
 
     @Column(nullable = false)
     private LocalDate endDate;
+
+    @Column
+    private Integer days;
 
     @Column(length = 1000)
     private String reason;

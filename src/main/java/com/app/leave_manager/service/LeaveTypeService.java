@@ -14,8 +14,8 @@ public class LeaveTypeService {
 
     @Transactional
     public void addLeaveType(LeaveType leaveType) {
-        if (leaveTypeRepository.existsByNameAndTenantIdAndDeletedFalse(leaveType.getName(), leaveType.getTenant().getId())) {
-            throw new IllegalArgumentException("Leave type with this name already exists for the tenant");
+        if (leaveTypeRepository.existsByNameAndDeletedFalse(leaveType.getName())) {
+            throw new IllegalArgumentException("Leave type with this name already exists");
         }
         leaveTypeRepository.save(leaveType);
         leaveBalanceService.createLeaveBalancesForNewLeaveType(leaveType);

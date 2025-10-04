@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface LeaveTypeRepository extends JpaRepository<LeaveType, Long> {
-    boolean existsByNameAndTenantIdAndDeletedFalse(String name, Long tenantId);
-    List<LeaveType> findAllByTenantIdAndDeletedFalse(Long tenantId);
+    boolean existsByNameAndDeletedFalse(String name);
+    List<LeaveType> findAllByDeletedFalse();
 }
