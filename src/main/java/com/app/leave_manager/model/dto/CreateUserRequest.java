@@ -20,7 +20,4 @@ public class CreateUserRequest {
 
     @NotNull(message = "Role is required")
     private Role role;
-
-    @NotNull(message = "Tenant ID is required")
-    private Long tenantId;  // Changed to just use the tenant ID instead of full tenant object
 }

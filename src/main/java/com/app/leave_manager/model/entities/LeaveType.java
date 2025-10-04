@@ -7,8 +7,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -29,7 +27,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "leave_types", uniqueConstraints = @UniqueConstraint(columnNames = {"tenant_id", "name"}))
+@Table(name = "leave_types", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -46,15 +44,11 @@ public class LeaveType extends BaseEntity {
     @SequenceGenerator(name = "leave_type_seq", sequenceName = "leave_type_seq")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
     private Integer defaultDays;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tenant_id", nullable = false)
-    private Tenant tenant;
 
     @Builder.Default
     @OneToMany(mappedBy = "leaveType", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

@@ -60,14 +60,14 @@ spring:
     open-in-view: true
 
   # RabbitMQ Configuration
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-    listener:
-      simple:
-        acknowledge-mode: manual
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+#    listener:
+#      simple:
+#        acknowledge-mode: manual
 
 
 

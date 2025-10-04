@@ -48,10 +48,6 @@ public class User extends BaseEntity{
     @Column(nullable = false)
     private Role role;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tenant_id")
-    private Tenant tenant;
-
     @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<LeaveRequest> leaveRequests = new HashSet<>();

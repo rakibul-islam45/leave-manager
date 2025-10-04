@@ -20,9 +20,18 @@ public class LeaveBalanceService {
     private final UserRepository userRepository;
     private final LeaveTypeRepository leaveTypeRepository;
 
+    public List<LeaveBalance> getUserLeaveBalances(Long userId) {
+        return leaveBalanceRepository.findAllByUserId(userId);
+    }
+
+    public LeaveBalance getUserLeaveBalanceByType(Long userId, Long leaveTypeId) {
+        return leaveBalanceRepository.findByUserIdAndLeaveTypeId(userId, leaveTypeId)
+                .orElseThrow(() -> new RuntimeException("Leave balance not found for user and type"));
+    }
+
     @Transactional
     public void createLeaveBalancesForNewLeaveType(LeaveType leaveType) {
-        List<User> users = userRepository.findAllByTenantIdAndDeletedFalse(leaveType.getTenant().getId());
+        List<User> users = userRepository.findAllByDeletedFalse();
         List<LeaveBalance> leaveBalances = users.stream()
                 .map(user -> LeaveBalance.builder()
                         .user(user)
@@ -35,7 +44,7 @@ public class LeaveBalanceService {
 
     @Transactional
     public void createLeaveBalancesForNewUser(User user) {
-        List<LeaveType> leaveTypes = leaveTypeRepository.findAllByTenantIdAndDeletedFalse(user.getTenant().getId());
+        List<LeaveType> leaveTypes = leaveTypeRepository.findAllByDeletedFalse();
         List<LeaveBalance> leaveBalances = leaveTypes.stream()
                 .map(leaveType -> LeaveBalance.builder()
                         .user(user)
